@@ -1,0 +1,28 @@
+doctype html
+html(lang="en")
+    include includes/head
+    body
+        include includes/navbar
+        h1 photos
+        a(href="/products/add") Add photo
+        table(border="1")
+            thead
+                th ID
+                th Title
+                th Caption
+                th Image
+                th User Email 
+                th Action
+            tbody
+                each photo in photos
+                    tr
+                        td #{photo.id}
+                        td #{photo.title}
+                        td #{photo.caption}
+                        td 
+                            img(src=photo.image_url)
+                        td #{photo.User.email}
+                        td 
+                            a(href=`/photos/${photo.id}`) See details
+                            a(href=`/photos/edit/${photo.id}`) Edit
+                            a(href=`/photos/hapus/${photo.id}`) Hapus

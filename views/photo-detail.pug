@@ -1,0 +1,11 @@
+doctype html
+html(lang="en")
+    include includes/head
+    body
+        include includes/navbar
+        h1 Photo Details
+        h3 ID: #{photosByID.id}
+        h4 Title: #{photosByID.title}
+        h4 Caption: #{photosByID.caption}
+        h4 Image: #{photosByID.image_url}
+        h4 User Email: #{photosByID.User.email}

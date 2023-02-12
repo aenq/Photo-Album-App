@@ -1,0 +1,25 @@
+doctype html
+html(lang="en")
+    include includes/head
+    body
+        include includes/navbar
+        h1 Add Photo
+        form(action="/products", method="POST")
+            label Title
+            br
+            input(type="text", name="title")
+            br
+            label Caption
+            br
+            input(type="text", name="caption")
+            br
+            label Image
+            br
+            input(type="text", name="image_url")
+            br
+            label User Email
+            br
+            input(type="text", name="email")
+            br
+            br
+            input(type="submit", value="Submit")
