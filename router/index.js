@@ -1,12 +1,10 @@
 const HomeController = require('../controllers/home-controller');
-const PhotoController = require('../controllers/photos-controller');
-
+const photoRouter = require('./photo-router');
+const userRouter = require('./user-router');
 const router = require('express').Router();
 
 router.get('/', HomeController.home);
-router.get('/photos', PhotoController.findAllPhotos);
-router.get('/photos/edit/:id', PhotoController.updatePhoto);
-router.post('/photos', PhotoController.findAllPhotos);
-router.delete('/photos/hapus/:id', PhotoController.deletePhotoByID);
+router.use('/photos', photoRouter);
+router.use(userRouter);
 
 module.exports = router;
