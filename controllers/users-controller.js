@@ -3,7 +3,7 @@ const {compare} = require('../helpers/hash')
 const {sign} = require('../helpers/jwt')
 
 class UserController {
-    static async signIn(req, res) {
+    static async signIn(req, res, next) {
         // dapat input dari klien
         const { email, password} = req.body;
         try {
@@ -18,15 +18,11 @@ class UserController {
             // kirim token jwt ke klien
             res.status(200).json({token});
         } catch (error) {
-            if (error.name === "EmailNotFound" || error.name === "WrongPassword") {
-                res.status(401).json({message : 'wrong email or password'});
-            } else {
-                res.status(500).json({message: 'internal server error'})
-            }
+            next(error)
         }
     }
 
-    static async signUp(req, res) {
+    static async signUp(req, res, next) {
         // dapatkan input dari klien
         const { username, email, password} = req.body;
         // create user baru
@@ -35,12 +31,8 @@ class UserController {
             const {id, email} =user;
             res.status(201).json({id, email});
         })
-        .catch((err) => {
-            if (err.name === 'SequelizeUniqueConstraintError') {
-                res.status(400).json({message : 'bad request'})
-            } else {
-                res.status(500).json({ message : 'internal server error'})
-            }
+        .catch((error) => {
+            next(error)
         })
 
     }
